@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
+    <title>Les Petits Plats</title>
+  </head>
+  <body>
+      <!-- HEADER LOGO/SEARCHBAR -->
+    <header>
+      <img class="logo-header" src="/assets/logo/logo.png" alt="logo du site" />
+      <input
+        id="searchbar"
+        onkeyup=""
+        type="text"
+        name="search"
+        placeholder="Rechercher une recette"
+      />
+    </header>
+
+    <!-- BOUTON DE TRI -->
+    <nav>
+      <div class="dropdown">
+        <input class="btn-selection ingredient" id="ingredient-select" type="text" name="ingredient" placeholder="Ingrédient"/>
+        <div class="dropdown-content ingredient">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <input class="btn-selection appareils" id="appareils-select" type="text" name="appareils" placeholder="Appareils"/>
+        <div class="dropdown-content appareils">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <input class="btn-selection ustensiles" id="ustensiles-select" type="text" name="ustensiles" placeholder="Ustensiles"/>
+        <div class="dropdown-content ustensiles">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- CARTE RECETTE -->
+
+   <section id="affichage-recette">
+    
+    </section>
+  </body>
+  <script type="text/javascript"  src="/data/recipes.js"></script>
+  <script type="text/javascript"  src="/js/script.js"></script>
+</html>
