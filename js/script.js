@@ -17,12 +17,11 @@ function allRecipes() {
 });
 }
 
-allRecipes()
 
 
 //////////////// AFFICHAGE LIEN NAVIGATION/TRI //////////////
-
-recipes.forEach((recipe)=> {
+function loadingNav() {
+arrayRecipes.forEach((recipe)=> {
 
   const link = document.createElement('a')
   link.innerHTML = `<a href="#">${recipe.appliance}</a>`
@@ -40,10 +39,11 @@ recipes.forEach((recipe)=> {
     const link = document.createElement('a')
     link.innerHTML = `<a href="#">${ingredient.ingredient}</a>`
     dropDownIngredients.append(link)
+
   })
 
 })
-
+}
 
 
 //////////////// LISTENER SEARCHBAR  ////////////////////////
@@ -56,9 +56,11 @@ searchBar.addEventListener("change", () => {
   if (enteredValue.length >= 3) {
     // Reinitialisation du DOM 
     sectionRecipes.innerHTML = "";
-    
-   
+    dropDownAppareils.innerHTML = "";
+    dropDownIngredients.innerHTML = "";
+    dropDownUstensiles.innerHTML = "";
 
+    
     // Variable qui filtre le mot entré dans la barre de recherche
     recipes.filter((recipe) => {
       if (
@@ -69,10 +71,18 @@ searchBar.addEventListener("change", () => {
         recipe.appliance.includes(enteredValue)
       ) {
         // Push + affichage des recettes contenant le mot entré dans la barrde de recherche;
+        arrayRecipes = []
+        arrayRecipes.push(recipe)
         recipesCard(recipe);
+        loadingNav(recipe)
       }
     });
 
   
   }
 });
+
+//////////////// START FUNCTION ////////////////////////
+
+allRecipes()
+loadingNav()
