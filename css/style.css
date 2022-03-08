@@ -37,6 +37,7 @@ header{
     position: absolute;
     min-width: 160px;
     z-index: 1;
+    
   }
   
   /* Links inside the dropdown */
@@ -87,7 +88,7 @@ header{
 
 
 #affichage-recette {
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
    flex-wrap: wrap;
 }

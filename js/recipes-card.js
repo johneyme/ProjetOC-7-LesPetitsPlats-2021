@@ -1,6 +1,6 @@
-function recipesCard() {
+function recipesCard(recipe) {
     
-    arrayRecipes.forEach(recipe => {
+   
      
      const sectionRecipes = document.querySelector("#affichage-recette")
      const div = document.createElement("div")
@@ -39,8 +39,5 @@ function recipesCard() {
 
       sectionRecipes.appendChild(div)
      
-
-
-    });
     
   }
