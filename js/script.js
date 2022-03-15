@@ -3,6 +3,7 @@ const sectionRecipes = document.querySelector("#affichage-recette");
 const dropDownAppareils = document.querySelector("#dropdown-appareils");
 const dropDownUstensiles = document.querySelector("#dropdown-ustensils");
 const dropDownIngredients = document.querySelector("#dropdown-ingredients");
+const selectorContain = document.querySelector(".selector-contain");
 const searchBar = document.getElementById("searchbar");
 
 // Déclaration variables en scope global
@@ -42,33 +43,45 @@ function loadingNav() {
     });
   });
 }
+ 
 
 function navDOM() {
   applianceArrayFiltered = [...new Set(applianceArray)];
   ustensilArrayFiltered = [...new Set(ustensilArray)];
   ingredientArrayFiltered = [...new Set(ingredientArray)];
 
-  console.log(ustensilArray);
-  console.log(ustensilArrayFiltered);
-
   applianceArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
-    link.innerHTML = `<a href="#">${elm}</a>`;
+    let string = elm[0].toUpperCase() + elm.slice(1); 
+    link.innerHTML = `${string}`;
     dropDownAppareils.append(link);
+    /*elm.addEventListener("click", () => {
+      const popSelector = document.createElement("div");
+      popSelector.classList.add("add-selector appareils");
+      popSelector.innerHTML = `${elm}`;
+      selectorContain.append(popSelector);
+    });*/
   });
 
   ustensilArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
-    link.innerHTML = `<a href="#">${elm}</a>`;
+    let string = elm[0].toUpperCase() + elm.slice(1); 
+    link.innerHTML = `${string}`;
     dropDownUstensiles.append(link);
   });
 
   ingredientArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
-    link.innerHTML = `<a href="#">${elm}</a>`;
+    let string = elm[0].toUpperCase() + elm.slice(1); 
+    link.innerHTML = `${string}`;
     dropDownIngredients.append(link);
+
   });
+
+  console.log(applianceArrayFiltered)
 }
+
+
 
 //////////////// LISTENER SEARCHBAR  ////////////////////////
 searchBar.addEventListener("change", () => {
@@ -92,8 +105,6 @@ searchBar.addEventListener("change", () => {
 
   // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
   if (enteredValue.length >= 3) {
-  
-
     // Variable qui filtre le mot entré dans la barre de recherche
     recipes.filter((recipe) => {
       if (
