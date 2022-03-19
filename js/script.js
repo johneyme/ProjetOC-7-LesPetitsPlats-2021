@@ -6,6 +6,10 @@ const dropDownIngredients = document.querySelector("#dropdown-ingredients");
 const selectorContain = document.querySelector(".selector-contain");
 const searchBar = document.getElementById("searchbar");
 
+
+
+
+
 // Déclaration variables en scope global
 let arrayRecipes = [];
 
@@ -46,25 +50,26 @@ function loadingNav() {
  
 
 function navDOM() {
+
+  //Tri des arrays qui enlève les doublons
   applianceArrayFiltered = [...new Set(applianceArray)];
   ustensilArrayFiltered = [...new Set(ustensilArray)];
   ingredientArrayFiltered = [...new Set(ingredientArray)];
 
+  // fonction qui affiche dans les liens de navigaytions les éléments des recettes présente dans arrayRecipes
+
   applianceArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
+    link.classList.add('link-nav', 'appareils')
     let string = elm[0].toUpperCase() + elm.slice(1); 
     link.innerHTML = `${string}`;
     dropDownAppareils.append(link);
-    /*elm.addEventListener("click", () => {
-      const popSelector = document.createElement("div");
-      popSelector.classList.add("add-selector appareils");
-      popSelector.innerHTML = `${elm}`;
-      selectorContain.append(popSelector);
-    });*/
+    
   });
 
   ustensilArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
+    link.classList.add('link-nav', 'ustensiles')
     let string = elm[0].toUpperCase() + elm.slice(1); 
     link.innerHTML = `${string}`;
     dropDownUstensiles.append(link);
@@ -72,14 +77,66 @@ function navDOM() {
 
   ingredientArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
+    link.classList.add('link-nav', 'ingredients')
     let string = elm[0].toUpperCase() + elm.slice(1); 
     link.innerHTML = `${string}`;
     dropDownIngredients.append(link);
 
   });
 
-  console.log(applianceArrayFiltered)
+  // fonction qui va afficher un tag lorsque l'on clique sur un des liens
+
+  const linkNavIngredient = document.querySelectorAll("a.link-nav.ingredients")
+  const linkNavUstensiles = document.querySelectorAll("a.link-nav.ustensiles")
+  const linkNavAppareils = document.querySelectorAll("a.link-nav.appareils")
+
+  linkNavUstensiles.forEach((link) => {
+    link.addEventListener('click', () => {
+      const tag = document.createElement("div");
+      tag.classList.add('add-selector');
+      tag.classList.add('ustensiles');
+      tag.innerHTML = `${link.innerHTML}<div class="close-selector"><i class="bi bi-x-circle"></i></div>`;
+      selectorContain.appendChild(tag)
+      closeTag()
+
+    })
+  })
+
+  linkNavAppareils.forEach((link) => {
+    link.addEventListener('click', () => {
+      const tag = document.createElement("div");
+      tag.classList.add('add-selector');
+      tag.classList.add('appareils');
+      tag.innerHTML = `${link.innerHTML}<div class="close-selector"><i class="bi bi-x-circle"></i></div>`;
+      selectorContain.appendChild(tag)
+      closeTag()
+
+    })
+  })
+  
+
+  linkNavIngredient.forEach((link) => {
+    link.addEventListener('click', () => {
+      const tag = document.createElement("div");
+      tag.classList.add('add-selector');
+      tag.classList.add('ingredient');
+      tag.innerHTML = `${link.innerHTML}<div class="close-selector"><i class="bi bi-x-circle"></i></div>`;
+      selectorContain.appendChild(tag)
+      closeTag()
+
+    })
+    
+  })
+
 }
+
+function closeTag(){
+  const closeSelector = document.querySelectorAll(".close-selector")
+  closeSelector.forEach((link) =>{
+    link.addEventListener('click',()=> {
+      link.parentElement.remove()
+    })
+  })}
 
 
 
@@ -121,6 +178,8 @@ searchBar.addEventListener("change", () => {
         arrayRecipes.push(recipe);
         recipesCard(recipe);
         loadingNav(recipe);
+        
+        
       }
     });
   } else if (enteredValue.length == 0) {
@@ -136,3 +195,5 @@ searchBar.addEventListener("change", () => {
 allRecipes();
 loadingNav();
 navDOM();
+closeTag()
+
