@@ -54,6 +54,7 @@ function loadingNav() {
   ingredientArrayFiltered = [...new Set(ingredientArray)];
 }
 
+
 function navDOM() {
 
   applianceArrayFiltered = applianceArrayFiltered.sort();
@@ -171,6 +172,8 @@ function navDOM() {
   });
 }
 
+////////////////// FONCTION CROIX FERMETURE TAG ////////////////////////
+
 function closeTag(closeCross, tag) {
   closeCross.addEventListener("click", (link) => {
     const tagToClose = link.path[2].textContent;
@@ -195,9 +198,11 @@ function closeTag(closeCross, tag) {
 }
 
 
-//////////////// LISTENER SEARCHBAR  ////////////////////////
-searchBar.addEventListener("change", () => {
-  const enteredValue = searchBar.value.toLowerCase();
+//////////////// FONCTION TRI DES RECETTES EN FONCTION DE ENTEREDVALUE  ////////////////////////
+
+
+function sortRecipes(enteredValue){
+  
   // Reinitialisation du DOM
   sectionRecipes.innerHTML = "";
   dropDownAppareils.innerHTML = "";
@@ -247,7 +252,42 @@ searchBar.addEventListener("change", () => {
     loadingNav();
   }
   navDOM();
-});
+};
+
+//////////////// FONCTION TRI DES RECETTES SELON TAG ////////////////////////
+/*
+function listenerTag() {
+  arrayRecipes.filter((recipe) => {
+    if (
+      recipe.name.toLowerCase().includes(//) ||
+      recipe.description.toLowerCase().includes(//) ||
+      recipe.ingredients.some((i) =>
+        i.ingredient.toLowerCase().includes(//)
+      ) ||
+      recipe.ustensils.some((u) => u.toLowerCase().includes(//)) ||
+      recipe.appliance.toLowerCase().includes(//)
+    ) {
+      // Push + affichage des recettes contenant le mot entré dans la barre de recherche;
+
+      arrayRecipes.push(recipe);
+      recipesCard(recipe);
+      loadingNav(recipe);
+    }
+  });
+
+}*/
+
+
+//////////////// LISTENER  /////////////////////////////
+
+searchBar.addEventListener("change", () => {
+  const enteredValue = searchBar.value.toLowerCase();
+  sortRecipes(enteredValue)
+})
+
+
+
+
 
 //////////////// START FUNCTION ////////////////////////
 
