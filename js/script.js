@@ -23,7 +23,7 @@ let applianceArrayFiltered = [];
 let ingredientArrayFiltered = [];
 let ustensilArrayFiltered = [];
 
-//////////////// AFFICHAGE TOUTES RECETTES //////////////////
+////////////////////////////////////////////// AFFICHAGE TOUTES RECETTES ////////////////////////////////////////////////////
 
 function allRecipes() {
   sectionRecipes.innerHTML = "";
@@ -37,7 +37,7 @@ function allRecipes() {
   });
 }
 
-//////////////// AFFICHAGE LIEN NAVIGATION/TRI //////////////
+//////////////////////////////////////////// AFFICHAGE LIEN NAVIGATION/TRI ////////////////////////////////////////////////
 
 function loadingNav() {
   arrayRecipes.forEach((recipe) => {
@@ -186,7 +186,7 @@ function navDOM() {
   });
 }
 
-////////////////// FONCTION CROIX FERMETURE TAG ////////////////////////
+//////////////////////////////////////// FONCTION CROIX FERMETURE TAG //////////////////////////////////////////////////
 
 function closeTag(closeCross, tag) {
   closeCross.addEventListener("click", (link) => {
@@ -213,6 +213,7 @@ function closeTag(closeCross, tag) {
         array = sortTagRecipes(array, tag);
       });
     } else if (tagList.length === 0) {
+      sectionRecipes.innerHTML = "";
       arrayRecipes.forEach(recipe => {
         recipesCard(recipe)
       })
@@ -220,7 +221,7 @@ function closeTag(closeCross, tag) {
   });
 }
 
-//////////////// FONCTION TRI DES RECETTES EN FONCTION DE ENTEREDVALUE  ////////////////////////
+/////////////////////////////////// FONCTION TRI DES RECETTES EN FONCTION DE ENTEREDVALUE  ////////////////////////////////
 
 function sortRecipes(enteredValue) {
   // Reinitialisation du DOM
@@ -276,7 +277,7 @@ function sortRecipes(enteredValue) {
   navDOM();
 }
 
-//////////////// FONCTION TRI DES RECETTES SELON TAG ////////////////////////
+//////////////////////////////////////// FONCTION TRI DES RECETTES SELON TAG //////////////////////////////////////////
 
 function sortTagRecipes(array, tag) {
   // Reinitialisation du DOM
@@ -310,7 +311,7 @@ function sortTagRecipes(array, tag) {
   return arraySortTagRecipes;
 }
 
-//////////////// LISTENER  /////////////////////////////
+/////////////////////////////////////////////// LISTENER  ////////////////////////////////////////////////////////////
 
 searchBar.addEventListener("keyup", () => {
   if (searchBar.value.length >= 1) {
@@ -323,22 +324,61 @@ searchBar.addEventListener("keyup", () => {
   }
 });
 
-//REINITIALISER LE DOM EST REMETTRE LE NAV EN FONCTION DE LAVALEUR D'ENTREE DE L'INPUT
-
 inputAppareilsSelect.addEventListener("keyup", () => {
+  const linkNavAppareils = document.querySelectorAll("a.link-nav.appareils");
   if (inputAppareilsSelect.value.length > 0) {
-    console.log(inputAppareilsSelect.value.toLowerCase());
+    linkNavAppareils.forEach(elm => {
+      if(elm.innerText.toLowerCase().includes(inputAppareilsSelect.value.toLowerCase())) {
+        elm.style.display = "block"
+      }
+        else {
+        elm.style.display = "none"
+      }
+    } )
+  } else if (inputAppareilsSelect.value.length === 0) {
+    linkNavAppareils.forEach(elm => {
+        elm.style.display = "block"
+      
+    } )
   }
+  
 });
 
 inputUstensilesSelect.addEventListener("keyup", () => {
-  if (inputAppareilsSelect.value.length > 0) {
-    console.log(inputAppareilsSelect.value.toLowerCase());
+  const linkNavUstensiles = document.querySelectorAll("a.link-nav.ustensiles");
+  if (inputUstensilesSelect.value.length > 0) {
+    linkNavUstensiles.forEach(elm => {
+      if(elm.innerText.toLowerCase().includes(inputUstensilesSelect.value.toLowerCase())) {
+        elm.style.display = "block"
+      }
+        else {
+        elm.style.display = "none"
+      }
+    } )
+  } else if (inputUstensilesSelect.value.length === 0) {
+    linkNavUstensiles.forEach(elm => {
+        elm.style.display = "block"
+      
+    } )
   }
 });
+
 inputIngredientSelect.addEventListener("keyup", () => {
-  if (inputUstensilesSelect.value.length > 0) {
-    console.log(inputUstensilesSelect.value.toLowerCase());
+  const linkNavIngredient = document.querySelectorAll("a.link-nav.ingredients");
+  if (inputIngredientSelect.value.length > 0) {
+    linkNavIngredient.forEach(elm => {
+      if(elm.innerText.toLowerCase().includes(inputIngredientSelect.value.toLowerCase())) {
+        elm.style.display = "block"
+      }
+        else {
+        elm.style.display = "none"
+      }
+    } )
+  } else if (inputIngredientSelect.value.length === 0) {
+    linkNavIngredient.forEach(elm => {
+        elm.style.display = "block"
+      
+    } )
   }
 });
 
