@@ -9,6 +9,7 @@ const tagSelector = document.querySelectorAll(".add-selector");
 const inputIngredientSelect = document.querySelector("#ingredient-select");
 const inputAppareilsSelect = document.querySelector("#appareils-select");
 const inputUstensilesSelect = document.querySelector("#ustensiles-select");
+const btnSelection = document.querySelector(".btn-selection");
 
 // Déclaration variables/Array en scope global
 let arrayRecipes = [];
@@ -61,10 +62,10 @@ function loadingNav() {
 }
 
 function navDOM() {
+  // fonction qui affiche dans les liens de navigations les éléments des recettes présente dans arrayRecipes
   applianceArrayFiltered = applianceArrayFiltered.sort();
   ustensilArrayFiltered = ustensilArrayFiltered.sort();
   ingredientArrayFiltered = ingredientArrayFiltered.sort();
-  // fonction qui affiche dans les liens de navigations les éléments des recettes présente dans arrayRecipes
 
   applianceArrayFiltered.forEach((elm) => {
     const link = document.createElement("a");
@@ -214,9 +215,9 @@ function closeTag(closeCross, tag) {
       });
     } else if (tagList.length === 0) {
       sectionRecipes.innerHTML = "";
-      arrayRecipes.forEach(recipe => {
-        recipesCard(recipe)
-      })
+      arrayRecipes.forEach((recipe) => {
+        recipesCard(recipe);
+      });
     }
   });
 }
@@ -269,7 +270,6 @@ function sortRecipes(enteredValue) {
       }
     });
   } else if (enteredValue.length <= 2) {
-
     arrayRecipes = [];
     allRecipes();
     loadingNav();
@@ -307,82 +307,91 @@ function sortTagRecipes(array, tag) {
       recipesCard(recipe);
     });
   }
-  
+
   return arraySortTagRecipes;
 }
 
 /////////////////////////////////////////////// LISTENER  ////////////////////////////////////////////////////////////
 
+// Listener Input Global
 searchBar.addEventListener("keyup", () => {
   if (searchBar.value.length >= 1) {
     const enteredValue = searchBar.value.toLowerCase();
     sortRecipes(enteredValue);
   } else if (searchBar.value.length === 0) {
-    allRecipes()
+    allRecipes();
     loadingNav();
     navDOM();
   }
 });
 
+// Listener Input Appareils
 inputAppareilsSelect.addEventListener("keyup", () => {
   const linkNavAppareils = document.querySelectorAll("a.link-nav.appareils");
   if (inputAppareilsSelect.value.length > 0) {
-    linkNavAppareils.forEach(elm => {
-      if(elm.innerText.toLowerCase().includes(inputAppareilsSelect.value.toLowerCase())) {
-        elm.style.display = "block"
+    linkNavAppareils.forEach((elm) => {
+      if (
+        elm.innerText
+          .toLowerCase()
+          .includes(inputAppareilsSelect.value.toLowerCase())
+      ) {
+        elm.style.display = "block";
+      } else {
+        elm.style.display = "none";
       }
-        else {
-        elm.style.display = "none"
-      }
-    } )
+    });
   } else if (inputAppareilsSelect.value.length === 0) {
-    linkNavAppareils.forEach(elm => {
-        elm.style.display = "block"
-      
-    } )
+    linkNavAppareils.forEach((elm) => {
+      elm.style.display = "block";
+    });
   }
-  
 });
 
+// Listener Input Ustensiles
 inputUstensilesSelect.addEventListener("keyup", () => {
   const linkNavUstensiles = document.querySelectorAll("a.link-nav.ustensiles");
   if (inputUstensilesSelect.value.length > 0) {
-    linkNavUstensiles.forEach(elm => {
-      if(elm.innerText.toLowerCase().includes(inputUstensilesSelect.value.toLowerCase())) {
-        elm.style.display = "block"
+    linkNavUstensiles.forEach((elm) => {
+      if (
+        elm.innerText
+          .toLowerCase()
+          .includes(inputUstensilesSelect.value.toLowerCase())
+      ) {
+        elm.style.display = "block";
+      } else {
+        elm.style.display = "none";
       }
-        else {
-        elm.style.display = "none"
-      }
-    } )
+    });
   } else if (inputUstensilesSelect.value.length === 0) {
-    linkNavUstensiles.forEach(elm => {
-        elm.style.display = "block"
-      
-    } )
+    linkNavUstensiles.forEach((elm) => {
+      elm.style.display = "block";
+    });
   }
 });
 
+// Listener Input Ingredient
 inputIngredientSelect.addEventListener("keyup", () => {
   const linkNavIngredient = document.querySelectorAll("a.link-nav.ingredients");
   if (inputIngredientSelect.value.length > 0) {
-    linkNavIngredient.forEach(elm => {
-      if(elm.innerText.toLowerCase().includes(inputIngredientSelect.value.toLowerCase())) {
-        elm.style.display = "block"
+    linkNavIngredient.forEach((elm) => {
+      if (
+        elm.innerText
+          .toLowerCase()
+          .includes(inputIngredientSelect.value.toLowerCase())
+      ) {
+        elm.style.display = "block";
+      } else {
+        elm.style.display = "none";
       }
-        else {
-        elm.style.display = "none"
-      }
-    } )
+    });
   } else if (inputIngredientSelect.value.length === 0) {
-    linkNavIngredient.forEach(elm => {
-        elm.style.display = "block"
-      
-    } )
+    linkNavIngredient.forEach((elm) => {
+      elm.style.display = "block";
+    });
   }
 });
 
-//////////////// START FUNCTION ////////////////////////
+////////////////////////////////// START FUNCTION /////////////////////////////////////////////////
 
 allRecipes();
 loadingNav();
