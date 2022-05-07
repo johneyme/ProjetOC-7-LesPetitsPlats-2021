@@ -276,11 +276,10 @@ function sortRecipes(enteredValue) {
       }
     }*/
 
-    ////////// --- forEach/filter Version --- ///////////////
-    tagSelector.forEach((link) => {
+  ////////// --- forEach/filter Version --- ///////////////
+  tagSelector.forEach((link) => {
     link.remove();
   });
-
 
   // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
   if (enteredValue.length >= 3) {
