@@ -23,6 +23,7 @@
         name="search"
         placeholder="Rechercher une recette"
       />
+      <i class="bi bi-search"></i>
     </header>
 
     <!-- BOUTON DE TRI -->
@@ -32,21 +33,21 @@
 
     <nav>
       <div class="dropdown">
-        <input class="btn-selection ingredient" id="ingredient-select" type="text" name="ingredient" placeholder="Rechercher un ingrédient" value="Ingrédients"/>
-        <div class="dropdown-content ingredient" id="dropdown-ingredients">
-        </div>
+        <input class="btn-selection ingredient deployed" id="ingredient-select" type="text" name="ingredient" placeholder="Rechercher un ingrédient" value="Ingrédients" save-btn="Ingrédients"/>
+        <div class="dropdown-content ingredient" id="dropdown-ingredients"></div>
+    <i class="bi bi-caret-down"></i>
       </div>
 
       <div class="dropdown">
-        <input class="btn-selection appareils" id="appareils-select" type="text" name="appareils" placeholder="Rechercher un appareils" value="Appareils"/>
-        <div class="dropdown-content appareils" id="dropdown-appareils">
-        </div>
+        <input class="btn-selection appareils" id="appareils-select" type="text" name="appareils" placeholder="Rechercher un appareils" value="Appareils" save-btn="Appareils"/>
+        <div class="dropdown-content appareils" id="dropdown-appareils"></div>
+       <i class="bi bi-caret-down"></i>
       </div>
 
       <div class="dropdown">
-        <input class="btn-selection ustensiles" id="ustensiles-select" type="text" name="ustensiles" placeholder="Rechercher un ustensiles" value="Ustensiles" />
-        <div class="dropdown-content ustensiles" id="dropdown-ustensils">
-        </div>
+        <input class="btn-selection ustensiles" id="ustensiles-select" type="text" name="ustensiles" placeholder="Rechercher un ustensiles" value="Ustensiles" save-btn="Ustensiles"/>
+        <div class="dropdown-content ustensiles" id="dropdown-ustensils"></div>
+        <i class="bi bi-caret-down"></i>
       </div>
     </nav>
 

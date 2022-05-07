@@ -9,7 +9,9 @@ const tagSelector = document.querySelectorAll(".add-selector");
 const inputIngredientSelect = document.querySelector("#ingredient-select");
 const inputAppareilsSelect = document.querySelector("#appareils-select");
 const inputUstensilesSelect = document.querySelector("#ustensiles-select");
-const btnSelection = document.querySelector(".btn-selection");
+const btnSelection = document.querySelectorAll(".btn-selection");
+const dropDown = document.querySelectorAll(".dropdown");
+const dropDownContents = document.querySelectorAll(".dropdown-content");
 
 // Déclaration variables/Array en scope global
 let arrayRecipes = [];
@@ -245,9 +247,40 @@ function sortRecipes(enteredValue) {
 
   tagList = [];
 
-  tagSelector.forEach((link) => {
+  /////////// --- Loop Version --- /////////////
+  /*for (let i = 0; i < tagSelector.length; i++) {
+    tagSelector[i].remove();
+  }
+
+  // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
+  if (enteredValue.length >= 3) {
+    // Variable qui filtre le mot entré dans la barre de recherche
+    for (let i = 0; i < recipes.length; i++) {
+      //recipes.filter((recipe) => {
+      if (
+        recipes[i].name.toLowerCase().includes(enteredValue) ||
+        recipes[i].description.toLowerCase().includes(enteredValue) ||
+        recipes[i].ingredients.some((i) =>
+          i.ingredient.toLowerCase().includes(enteredValue)
+        ) ||
+        recipes[i].ustensils.some((u) =>
+          u.toLowerCase().includes(enteredValue)
+        ) ||
+        recipes[i].appliance.toLowerCase().includes(enteredValue)
+      ) {
+        // Push + affichage des recettes contenant le mot entré dans la barre de recherche;
+
+        arrayRecipes.push(recipes[i]);
+        recipesCard(recipes[i]);
+        loadingNav(recipes[i]);
+      }
+    }*/
+
+    ////////// --- forEach/filter Version --- ///////////////
+    tagSelector.forEach((link) => {
     link.remove();
   });
+
 
   // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
   if (enteredValue.length >= 3) {
@@ -313,6 +346,36 @@ function sortTagRecipes(array, tag) {
 
 /////////////////////////////////////////////// LISTENER  ////////////////////////////////////////////////////////////
 
+dropDown.forEach((btn) => {
+  let child = btn.firstElementChild;
+  let nextchild = child.nextElementSibling;
+
+  child.addEventListener("focus", () => {
+    child.classList.add("style-focus-btn");
+    child.nextElementSibling.classList.add("style-focus");
+    nextchild.nextElementSibling.classList.add("rotation");
+    child.value = "";
+  });
+});
+
+document.body.addEventListener("click", (e) => {
+  if (
+    !e.target.classList.contains("dropdown-content") &&
+    !e.target.classList.contains("dropdown") &&
+    !e.target.classList.contains("btn-selection") &&
+    !e.target.classList.contains("link-nav")
+  ) {
+    dropDown.forEach((content) => {
+      let input = content.firstElementChild;
+      let nextInput = input.nextElementSibling;
+      input.classList.remove("style-focus-btn");
+      input.nextElementSibling.classList.remove("style-focus");
+      nextInput.nextElementSibling.classList.remove("rotation");
+      input.value = input.getAttribute("save-btn");
+    });
+  }
+});
+
 // Listener Input Global
 searchBar.addEventListener("keyup", () => {
   if (searchBar.value.length >= 1) {
@@ -327,69 +390,44 @@ searchBar.addEventListener("keyup", () => {
 
 // Listener Input Appareils
 inputAppareilsSelect.addEventListener("keyup", () => {
-  const linkNavAppareils = document.querySelectorAll("a.link-nav.appareils");
-  if (inputAppareilsSelect.value.length > 0) {
-    linkNavAppareils.forEach((elm) => {
-      if (
-        elm.innerText
-          .toLowerCase()
-          .includes(inputAppareilsSelect.value.toLowerCase())
-      ) {
-        elm.style.display = "block";
-      } else {
-        elm.style.display = "none";
-      }
-    });
-  } else if (inputAppareilsSelect.value.length === 0) {
-    linkNavAppareils.forEach((elm) => {
-      elm.style.display = "block";
-    });
-  }
+  let inputSelect = inputAppareilsSelect;
+  const linkNavigation = document.querySelectorAll("a.link-nav.appareils");
+  elmNav(inputSelect, linkNavigation);
 });
 
 // Listener Input Ustensiles
 inputUstensilesSelect.addEventListener("keyup", () => {
-  const linkNavUstensiles = document.querySelectorAll("a.link-nav.ustensiles");
-  if (inputUstensilesSelect.value.length > 0) {
-    linkNavUstensiles.forEach((elm) => {
-      if (
-        elm.innerText
-          .toLowerCase()
-          .includes(inputUstensilesSelect.value.toLowerCase())
-      ) {
-        elm.style.display = "block";
-      } else {
-        elm.style.display = "none";
-      }
-    });
-  } else if (inputUstensilesSelect.value.length === 0) {
-    linkNavUstensiles.forEach((elm) => {
-      elm.style.display = "block";
-    });
-  }
+  let inputSelect = inputUstensilesSelect;
+  const linkNavigation = document.querySelectorAll("a.link-nav.ustensiles");
+  elmNav(inputSelect, linkNavigation);
 });
 
 // Listener Input Ingredient
 inputIngredientSelect.addEventListener("keyup", () => {
-  const linkNavIngredient = document.querySelectorAll("a.link-nav.ingredients");
-  if (inputIngredientSelect.value.length > 0) {
-    linkNavIngredient.forEach((elm) => {
+  let inputSelect = inputIngredientSelect;
+  const linkNavigation = document.querySelectorAll("a.link-nav.ingredients");
+  elmNav(inputSelect, linkNavigation);
+});
+
+//////////////////////////////////////////////// UTILIS FUNCTION ///////////////////////////////////////////////////////
+
+function elmNav(inputSelect, linkNavigation) {
+  if (inputSelect.value.length > 0) {
+    linkNavigation.forEach((elm) => {
       if (
-        elm.innerText
-          .toLowerCase()
-          .includes(inputIngredientSelect.value.toLowerCase())
+        elm.innerText.toLowerCase().includes(inputSelect.value.toLowerCase())
       ) {
         elm.style.display = "block";
       } else {
         elm.style.display = "none";
       }
     });
-  } else if (inputIngredientSelect.value.length === 0) {
-    linkNavIngredient.forEach((elm) => {
+  } else if (inputSelect.value.length === 0) {
+    linkNavigation.forEach((elm) => {
       elm.style.display = "block";
     });
   }
-});
+}
 
 ////////////////////////////////// START FUNCTION /////////////////////////////////////////////////
 

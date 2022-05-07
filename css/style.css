@@ -23,6 +23,13 @@ header {
   background-color: #e7e7e7;
 }
 
+.bi-search{
+  position: absolute;
+  right: 110px;
+  top: 185px;
+  cursor: text;
+}
+
 #affichage-recette {
   justify-content: space-around;
   display: flex;
@@ -62,6 +69,22 @@ header {
   display: inline-block;
   margin-right: 30px;
 }
+
+.bi-caret-down{
+  color: white;
+  position: absolute;
+  margin-left: -21px;
+  margin-top: 21px;
+  cursor: text;
+  
+}
+
+.rotation{
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+
 
 
 /* Dropdown Content (Hidden by Default) */
@@ -113,20 +136,6 @@ header {
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  width: 470px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border-radius: 0 0 5px 5px;
-}
-
-.dropdown:hover .btn-selection{
-  width: 450px;
-  border-radius: 5px 5px 0 0;
-  
-}
-
 
 .btn-selection {
   padding: 10px;
@@ -137,12 +146,30 @@ header {
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  cursor: pointer;
+  
 }
 .btn-selection::placeholder {
   color:white;
   opacity: 0;
 }
+
+
+.style-focus {
+  width: 470px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 0 0 5px 5px;
+}
+
+.style-focus-btn{
+  width: 450px;
+  border-radius: 5px 5px 0 0;
+  
+}
+
+
+
 
 .dropdown:hover  .btn-selection::placeholder{
   opacity: 0.5;
@@ -213,6 +240,8 @@ header {
 .etape-recette {
   width: 50%;
   font-size: smaller;
+  overflow: auto;
+  height: 100px;
 }
 
 .ingredient-recette {
