@@ -350,6 +350,12 @@ dropDown.forEach((btn) => {
   let nextchild = child.nextElementSibling;
 
   child.addEventListener("focus", () => {
+    dropDown.forEach((drop) => {
+      drop.firstElementChild.classList.remove("style-focus-btn");
+    drop.firstElementChild.nextElementSibling.classList.remove("style-focus");
+    drop.firstElementChild.value = drop.firstElementChild.getAttribute("save-btn");
+    })
+    
     child.classList.add("style-focus-btn");
     child.nextElementSibling.classList.add("style-focus");
     nextchild.nextElementSibling.classList.add("rotation");
