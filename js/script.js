@@ -26,6 +26,17 @@ let applianceArrayFiltered = [];
 let ingredientArrayFiltered = [];
 let ustensilArrayFiltered = [];
 
+// Utils Function
+
+function noRecipesMessage() {
+  if (sectionRecipes.firstElementChild === null) {
+    sectionRecipes.innerHTML = "";
+    let message = document.createElement("p");
+    message.innerHTML = "Aucune recette à afficher";
+    sectionRecipes.appendChild(message);
+  }
+}
+
 ////////////////////////////////////////////// AFFICHAGE TOUTES RECETTES ////////////////////////////////////////////////////
 
 function allRecipes() {
@@ -306,6 +317,8 @@ function sortRecipes(enteredValue) {
     allRecipes();
     loadingNav();
   }
+
+  noRecipesMessage();
   navDOM();
 }
 
@@ -340,6 +353,7 @@ function sortTagRecipes(array, tag) {
     });
   }
 
+  noRecipesMessage();
   return arraySortTagRecipes;
 }
 
@@ -352,10 +366,11 @@ dropDown.forEach((btn) => {
   child.addEventListener("focus", () => {
     dropDown.forEach((drop) => {
       drop.firstElementChild.classList.remove("style-focus-btn");
-    drop.firstElementChild.nextElementSibling.classList.remove("style-focus");
-    drop.firstElementChild.value = drop.firstElementChild.getAttribute("save-btn");
-    })
-    
+      drop.firstElementChild.nextElementSibling.classList.remove("style-focus");
+      drop.firstElementChild.value =
+        drop.firstElementChild.getAttribute("save-btn");
+    });
+
     child.classList.add("style-focus-btn");
     child.nextElementSibling.classList.add("style-focus");
     nextchild.nextElementSibling.classList.add("rotation");
