@@ -37,6 +37,24 @@ function noRecipesMessage() {
   }
 }
 
+function elmNav(inputSelect, linkNavigation) {
+  if (inputSelect.value.length > 0) {
+    linkNavigation.forEach((elm) => {
+      if (
+        elm.innerText.toLowerCase().includes(inputSelect.value.toLowerCase())
+      ) {
+        elm.style.display = "block";
+      } else {
+        elm.style.display = "none";
+      }
+    });
+  } else if (inputSelect.value.length === 0) {
+    linkNavigation.forEach((elm) => {
+      elm.style.display = "block";
+    });
+  }
+}
+
 ////////////////////////////////////////////// AFFICHAGE TOUTES RECETTES ////////////////////////////////////////////////////
 
 function allRecipes() {
@@ -235,7 +253,7 @@ function closeTag(closeCross, tag) {
   });
 }
 
-/////////////////////////////////// FONCTION TRI DES RECETTES EN FONCTION DE ENTEREDVALUE  ////////////////////////////////
+////////////////////////////// INPUT GLOBAL/FONCTION TRI DES RECETTES EN FONCTION DE ENTEREDVALUE  ////////////////////////////////
 
 function sortRecipes(enteredValue) {
   // Reinitialisation du DOM
@@ -263,8 +281,7 @@ function sortRecipes(enteredValue) {
     tagSelector[i].remove();
   }
 
-  // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
-  if (enteredValue.length >= 3) {
+ 
     // Variable qui filtre le mot entré dans la barre de recherche
     for (let i = 0; i < recipes.length; i++) {
       //recipes.filter((recipe) => {
@@ -292,8 +309,7 @@ function sortRecipes(enteredValue) {
     link.remove();
   });
 
-  // Si la valeur de la searchbar est supérieur ou égale à 3, tu execute
-  if (enteredValue.length >= 3) {
+ 
     // Variable qui filtre le mot entré dans la barre de recherche
     recipes.filter((recipe) => {
       if (
@@ -312,11 +328,7 @@ function sortRecipes(enteredValue) {
         loadingNav(recipe);
       }
     });
-  } else if (enteredValue.length <= 2) {
-    arrayRecipes = [];
-    allRecipes();
-    loadingNav();
-  }
+  
 
   noRecipesMessage();
   navDOM();
@@ -398,10 +410,11 @@ document.body.addEventListener("click", (e) => {
 
 // Listener Input Global
 searchBar.addEventListener("keyup", () => {
-  if (searchBar.value.length >= 1) {
+  if (searchBar.value.length >= 3) {
     const enteredValue = searchBar.value.toLowerCase();
     sortRecipes(enteredValue);
-  } else if (searchBar.value.length === 0) {
+  } else if (searchBar.value.length <= 2) {
+    arrayRecipes = [];
     allRecipes();
     loadingNav();
     navDOM();
@@ -428,26 +441,6 @@ inputIngredientSelect.addEventListener("keyup", () => {
   const linkNavigation = document.querySelectorAll("a.link-nav.ingredients");
   elmNav(inputSelect, linkNavigation);
 });
-
-//////////////////////////////////////////////// UTILIS FUNCTION ///////////////////////////////////////////////////////
-
-function elmNav(inputSelect, linkNavigation) {
-  if (inputSelect.value.length > 0) {
-    linkNavigation.forEach((elm) => {
-      if (
-        elm.innerText.toLowerCase().includes(inputSelect.value.toLowerCase())
-      ) {
-        elm.style.display = "block";
-      } else {
-        elm.style.display = "none";
-      }
-    });
-  } else if (inputSelect.value.length === 0) {
-    linkNavigation.forEach((elm) => {
-      elm.style.display = "block";
-    });
-  }
-}
 
 ////////////////////////////////// START FUNCTION /////////////////////////////////////////////////
 
