@@ -277,58 +277,77 @@ function sortRecipes(enteredValue) {
   tagList = [];
 
   /////////// --- Loop Version --- /////////////
-  /*for (let i = 0; i < tagSelector.length; i++) {
+  /*
+  // FUNCTION INCLUDES WITH LOOP
+
+  function isIncludes(pattern, text) {
+    if (pattern.length == 0) return 0;
+
+    let lsp = [0];
+    for (let i = 1; i < pattern.length; i++) {
+      let j = lsp[i - 1];
+      while (j > 0 && pattern.charAt(i) != pattern.charAt(j)) j = lsp[j - 1];
+      if (pattern.charAt(i) == pattern.charAt(j)) j++;
+      lsp.push(j);
+    }
+
+    let j = 0;
+    for (let i = 0; i < text.length; i++) {
+      while (j > 0 && text.charAt(i) != pattern.charAt(j)) j = lsp[j - 1];
+      if (text.charAt(i) == pattern.charAt(j)) {
+        j++;
+        if (j == pattern.length) return i - (j - 1);
+      }
+    }
+    return -1;
+  }
+
+  for (let i = 0; i < tagSelector.length; i++) {
     tagSelector[i].remove();
   }
 
- 
-    // Variable qui filtre le mot entré dans la barre de recherche
-    for (let i = 0; i < recipes.length; i++) {
-      //recipes.filter((recipe) => {
-      if (
-        recipes[i].name.toLowerCase().includes(enteredValue) ||
-        recipes[i].description.toLowerCase().includes(enteredValue) ||
-        recipes[i].ingredients.some((i) =>
-          i.ingredient.toLowerCase().includes(enteredValue)
-        ) ||
-        recipes[i].ustensils.some((u) =>
-          u.toLowerCase().includes(enteredValue)
-        ) ||
-        recipes[i].appliance.toLowerCase().includes(enteredValue)
-      ) {
-        // Push + affichage des recettes contenant le mot entré dans la barre de recherche;
-
-        arrayRecipes.push(recipes[i]);
-        recipesCard(recipes[i]);
-        loadingNav(recipes[i]);
-      }
-    }*/
-
+  // Variable qui filtre le mot entré dans la barre de recherche
+  for (recipe of recipes) {
+    if (
+      isIncludes(enteredValue, recipe.name.toLowerCase()) != -1 ||
+      isIncludes(enteredValue, recipe.description.toLowerCase()) != -1 ||
+      recipe.ingredients.some(
+        (i) => isIncludes(enteredValue, i.ingredient.toLowerCase()) != -1
+      ) ||
+      recipe.ustensils.some(
+        (u) => isIncludes(enteredValue, u.toLowerCase()) != -1
+      ) ||
+      isIncludes(enteredValue, recipe.appliance.toLowerCase()) != -1
+    ) {
+      arrayRecipes.push(recipe);
+      recipesCard(recipe);
+      loadingNav(recipe);
+    }
+  }
+*/
   ////////// --- forEach/filter Version --- ///////////////
   tagSelector.forEach((link) => {
     link.remove();
   });
 
- 
-    // Variable qui filtre le mot entré dans la barre de recherche
-    recipes.filter((recipe) => {
-      if (
-        recipe.name.toLowerCase().includes(enteredValue) ||
-        recipe.description.toLowerCase().includes(enteredValue) ||
-        recipe.ingredients.some((i) =>
-          i.ingredient.toLowerCase().includes(enteredValue)
-        ) ||
-        recipe.ustensils.some((u) => u.toLowerCase().includes(enteredValue)) ||
-        recipe.appliance.toLowerCase().includes(enteredValue)
-      ) {
-        // Push + affichage des recettes contenant le mot entré dans la barre de recherche;
+  // Variable qui filtre le mot entré dans la barre de recherche
+  recipes.filter((recipe) => {
+    if (
+      recipe.name.toLowerCase().includes(enteredValue) ||
+      recipe.description.toLowerCase().includes(enteredValue) ||
+      recipe.ingredients.some((i) =>
+        i.ingredient.toLowerCase().includes(enteredValue)
+      ) ||
+      recipe.ustensils.some((u) => u.toLowerCase().includes(enteredValue)) ||
+      recipe.appliance.toLowerCase().includes(enteredValue)
+    ) {
+      // Push + affichage des recettes contenant le mot entré dans la barre de recherche;
 
-        arrayRecipes.push(recipe);
-        recipesCard(recipe);
-        loadingNav(recipe);
-      }
-    });
-  
+      arrayRecipes.push(recipe);
+      recipesCard(recipe);
+      loadingNav(recipe);
+    }
+  });
 
   noRecipesMessage();
   navDOM();
